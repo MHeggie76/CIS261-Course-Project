@@ -1,74 +1,59 @@
-def calculate_tax_and_netpay(total_hours, hourly_rate, tax_rate):
-    tax = float(total_hours) * float(hourly_rate) * (float(tax_rate) / 100)
-    net_pay = float(total_hours) * float(hourly_rate) - tax
-    return tax, net_pay
-
 def GetEmpName():
-    empname = float(input("Enter employee name: "))
+    empname = input("Enter employee name: ")
     return empname
 
-def get_total_hours():
-    total_hours = float(input("Enter total hours: "))
-    return total_hours
+def GetHoursWorked():
+    hours = float(input("Enter hours worked: "))
+    return hours
 
-def get_hourly_rate():
-    hourly_rate = float(input("Enter hourly rate: "))
-    return hourly_rate
+def GetHourlyRate():
+    hourlyrate = float(input("Enter hourly rate: "))
+    return hourlyrate
 
-def get_tax_rate():
-    tax_rate = float(input("Enter hourly rate: "))
-    return tax_rate
+def GetTaxRate():
+    taxrate = float(input("Enter tax rate: "))
+    return taxrate
 
-def get_gross_pay(total_hours, hourly_rate):
-    gross_pay = float(total_hours) * float(hourly_rate)
-    return gross_pay
+def CalcTaxAndNetPay(hours, hourlyrate,taxrate):
+    grosspay = hours * hourlyrate
+    incometax = grosspay * taxrate
+    netpay = grosspay - incometax
+    return grosspay, incometax, netpay
 
-def display_employee_info(name, total_hours, hourly_rate, tax_rate, tax, gross_pay, net_pay): 
-    print ("-------------------------------------------------------------")
-    print ("Employee name:", name)
-    print ("Total hours:", total_hours)
-    print ("Hourly rate:", hourly_rate)
-    print ("Tax rate:", tax_rate)
-    print ("Income tax:", tax)
-    print ("Gross pay:", gross_pay)
-    print ("Net pay:", net_pay)
-    print ("-------------------------------------------------------------")
+def printinfo(empname, hours, hourlyrate, grosspay, taxrate, incometax, netpay):
+    print("Name:  ", empname, f"{hours:,.2f}", f"{hourlyrate:,.2f}", f"{grosspay:,.2f}", f"{taxrate:,.1%}", f"{incometax:,.2f}",f"{netpay:,.2f}")
 
-def display_total_info(total_employees, total_hours, total_tax, total_gross_pay, total_net_pay):
-    print ("-------------------------------------------------------------")
-    print ("Total number of employees:", total_employees)
-    print ("Total hours:", total_hours)
-    print ("Total tax:", total_tax)
-    print ("Total gross pay:", total_gross_pay)
-    print ("-------------------------------------------------------------")
+def PrintTotals(TotEmployees, TotHours, TotGrossPay, TotTax, TotNetPay):
+    print()
+    print(f"Total Numer Of Employees: {TotEmployees}")
+    print(f"Total hours workd: {TotHours:,.2f}")
+    print(f"Total Gross Pay: {TotGrossPay:,.2f}")
+    print(f"Total Tax: {TotTax:,.2f}")
+    print(f"Total Net Pay: {TotNetPay:,.2f}")
 
-def main ():
-    # keep total counts
-    total_employees = 0
-    total_hours = 0
-    total_tax = 0
-    total_gross_pay = 0
-    total_net_pay = 0
+if __name__ == "__main__":
+    TotEmployees = 0
+    TotHours = 0.00
+    TotGrossPay = 0.00
+    TotTax = 0.00
+    TotNetPay = 0.00
 
     while True:
-        name = get_name()
-        if name == "End":
+        empname = GetEmpName()
+        if (empname.upper() == "End"):  
             break
-        hours = get_total_hours()
-        hourly_rate = get_hourly_rate()
-        tax_rate = get_tax_rate()
-        gross_pay = get_gross_pay(hours, hourly_rate)
-        tax, net_pay = calculate_tax_and_netpay(hours, hourly_rate, tax_rate)
-        display_employee_info(name, hours, hourly_rate, tax_rate, tax, gross_pay, net_pay)
-        #update total
-        total_emplyees += 1
-        total_hours += hours
-        total_tax += tax
-        total_gross_pay += grosget_gross_pay
-        total_net_pay += net_pay
-    # display total counts
-    display_total_info(total_employees, total_hours, total_tax, total_gross_pay, total_net_pay)
-    #import guard
-    if __name__ == "__main__":
-        main()
+        hours = GetHoursWorked()
+        hourlyrate = GetHourlyRate()
+        taxrate = GetTaxRate()
+      
+        grosspay, incometax, netpay = CalcTaxAndNetPay(hours, hourlyrate, taxrate)
+        printinfo(empname, hours, hourlyrate, grosspay, taxrate, incometax, netpay)
+       
+        TotEmployees += 1
+        TotHours += hours
+        TotTax += taxrate
+        TotGrossPay += grosspay
+        TotNetPay += netpay
+
+    PrintTotals (TotEmployees, TotHours, TotGrossPay, TotTax, TotNetPay)
 
