@@ -21,7 +21,13 @@ def CalcTaxAndNetPay(hours, hourlyrate,taxrate):
     return grosspay, incometax, netpay
 
 def printinfo(empname, hours, hourlyrate, grosspay, taxrate, incometax, netpay):
-    print("Name:  ", empname, f"{hours:,.2f}", f"{hourlyrate:,.2f}", f"{grosspay:,.2f}", f"{taxrate:,.1%}", f"{incometax:,.2f}",f"{netpay:,.2f}")
+    print("Name:  ", empname)
+    print("Hours Worked:  ", f"{hours:,.2f}")
+    print("Hourly Rate:  ", f"{hourlyrate:,.2f}") 
+    print("Gross Pay:  ", f"{grosspay:,.2f}")
+    print("Tax Rate:  ", f"{taxrate:,.1%}")
+    print("Income Tax:  ", f"{incometax:,.2f}") 
+    print("Net Pay:  ", f"{netpay:,.2f}")
 
 def PrintTotals(TotEmployees, TotHours, TotGrossPay, TotTax, TotNetPay):
     print()
@@ -40,7 +46,7 @@ if __name__ == "__main__":
 
     while True:
         empname = GetEmpName()
-        if (empname.upper() == "End"):  
+        if (empname.upper() == "END"):  
             break
         hours = GetHoursWorked()
         hourlyrate = GetHourlyRate()
